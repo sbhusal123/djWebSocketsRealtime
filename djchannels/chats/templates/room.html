@@ -10,8 +10,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-        <script
-            src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <style>
             .chat
@@ -155,6 +153,29 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </body>
-        </html>
+                </body>
+            </html>
+
+            <script>
+                
+                var wsStart = window.location.protocol === "https" ? "wss://" : "ws://";
+                var endpoint = wsStart + window.location.host + window.location.pathname;
+
+                var socket = new WebSocket(endpoint);
+
+                socket.onmessage = function(e) {
+                    console.log("message", e)
+                }
+
+                socket.onopen =  function(e) {
+                    console.log("open", e)
+                }
+
+                socket.onerror = function(e) {
+                    console.log("error", e)
+                }
+
+                socket.onclose = function(e) {
+                    console.log("close", e)
+                }
+            </script>
