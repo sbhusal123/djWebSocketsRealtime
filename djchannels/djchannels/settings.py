@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Packages
+    'channels',
+
     # custom
     'chats'
 ]
@@ -53,6 +56,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'djchannels.urls'
+ASGI_APPLICATION = "djchannels.asgi.application"
 
 TEMPLATES = [
     {
@@ -70,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'djchannels.wsgi.application'
+# WSGI_APPLICATION = 'djchannels.wsgi.application'
 
 
 # Database
