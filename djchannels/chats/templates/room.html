@@ -51,7 +51,7 @@
             .panel-body
             {
                 overflow-y: scroll;
-                height: 250px;
+                height: 500px;
             }
             ::-webkit-scrollbar-track
             {
@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <hr>
-                                    <ul class="chat">
+                                    <ul class="chat chatHolder">
                                         {% for message in messages %}
                                         <li class="clearfix">
                                             <div class="chat-body clearfix">
@@ -168,8 +168,30 @@
                 var socket = new WebSocket(endpoint);
                 var chatForm = $("#chatForm");
 
+                var chatHolder = $(".chatHolder");
+
+
                 socket.onmessage = function(e) {
                     console.log("message", e)
+                    var data = JSON.parse(e.data);
+                    chatHolder.append(`
+                        <li class="clearfix">
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong
+                                        class="primary-font">${data.username}</strong>
+                                    <small
+                                        class="pull-right
+                                        text-muted">
+                                        <span class="glyphicon
+                                            glyphicon-time"></span>${data.time}</small>
+                                </div>
+                                <p>
+                                    ${data.text}
+                                </p>
+                            </div>
+                        </li>
+                `);
                 }
 
                 socket.onopen =  function(e) {
@@ -181,11 +203,11 @@
                         var msgTextDom = $(".input-sm");
                         socket.send(JSON.stringify({
                             "text": msgTextDom.val(),
-                            "user": "{{request.user.username}}",
-                            "room": "{{object.id}}"
+                            "username": "{{request.user.username}}",
+                            "room": parseInt("{{object.id}}")
                         }))
-                        socket.send();
                         msgTextDom.val("");
+
                         
                     });
                 }

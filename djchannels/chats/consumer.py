@@ -11,6 +11,7 @@ from .models import Messages, Room
 # Utils/Heplers
 import asyncio
 import json
+import datetime
 
 
 class ChatConsumer(AsyncConsumer):
@@ -28,6 +29,15 @@ class ChatConsumer(AsyncConsumer):
     async def websocket_receive(self, event):
         """Executed when a message is received from websocket"""
         print("Connected", event)
+        form_text = event.get("text", None)
+
+        if form_text:
+            payload = json.loads(form_text)
+            payload['time'] = str("12:20 AM")
+            await self.send({
+                "type": "websocket.send",
+                "text": json.dumps(payload)
+            })
 
     async def websocket_disconnect(self, event):
         """Executed when the socket disconnects"""
