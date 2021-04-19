@@ -32,3 +32,6 @@ class ChatConsumer(AsyncConsumer):
     async def websocket_disconnect(self, event):
         """Executed when the socket disconnects"""
         print("Connected", event)
+        await self.send({
+            "type": "websocket.disconnect",
+        })        

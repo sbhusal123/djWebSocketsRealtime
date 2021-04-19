@@ -137,18 +137,22 @@
                                     </ul>
                                 </div>
                                 <div class="panel-footer">
-                                    <div class="input-group">
-                                        <input id="btn-input" type="text"
-                                            class="form-control input-sm"
-                                            placeholder="Type your message
-                                            here..." />
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-warning
-                                                btn-sm"
-                                                id="btn-chat">
-                                                Send</button>
-                                        </span>
-                                    </div>
+                                    <form id="chatForm" method="POST">
+                                        <div class="input-group">
+                                            <input id="btn-input"
+                                                type="text"
+                                                class="form-control input-sm"
+                                                placeholder="Type your message
+                                                here..." />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-warning
+                                                    btn-sm"
+                                                    id="btn-chat">
+                                                    Send</button>
+                                            </span>
+                                        </div>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
@@ -162,6 +166,7 @@
                 var endpoint = wsStart + window.location.host + window.location.pathname;
 
                 var socket = new WebSocket(endpoint);
+                var chatForm = $("#chatForm");
 
                 socket.onmessage = function(e) {
                     console.log("message", e)
@@ -169,6 +174,20 @@
 
                 socket.onopen =  function(e) {
                     console.log("open", e)
+
+                    chatForm.submit(function(event){
+                        event.preventDefault();
+
+                        var msgTextDom = $(".input-sm");
+                        socket.send(JSON.stringify({
+                            "text": msgTextDom.val(),
+                            "user": "{{request.user.username}}",
+                            "room": "{{object.id}}"
+                        }))
+                        socket.send();
+                        msgTextDom.val("");
+                        
+                    });
                 }
 
                 socket.onerror = function(e) {
