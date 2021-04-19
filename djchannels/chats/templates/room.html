@@ -138,6 +138,7 @@
                                 </div>
                                 <div class="panel-footer">
                                     <form id="chatForm" method="POST">
+                                        {%csrf_token%}
                                         <div class="input-group">
                                             <input id="btn-input"
                                                 type="text"
@@ -160,12 +161,14 @@
                 </body>
             </html>
 
+            <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.js"></script>
             <script>
                 
                 var wsStart = window.location.protocol === "https" ? "wss://" : "ws://";
                 var endpoint = wsStart + window.location.host + window.location.pathname;
 
-                var socket = new WebSocket(endpoint);
+                var socket = new ReconnectingWebSocket(endpoint);
                 var chatForm = $("#chatForm");
 
                 var chatHolder = $(".chatHolder");
@@ -208,7 +211,6 @@
                         }))
                         msgTextDom.val("");
 
-                        
                     });
                 }
 

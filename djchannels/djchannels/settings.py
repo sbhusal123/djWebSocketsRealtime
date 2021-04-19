@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-90d@gn$q1-_!x!i=ri14w4xugx4vmtmka67u^l9)1pumf(a1$&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -74,6 +74,7 @@ TEMPLATES = [
     },
 ]
 
+
 # WSGI_APPLICATION = 'djchannels.wsgi.application'
 
 
@@ -85,6 +86,15 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
+    },
 }
 
 
