@@ -1,7 +1,7 @@
 ## Live Chat Messagging with Django Websockets
 
 **Architecture of Event Driven WebSocket based Application**
-![Arch](https://heroku-blog-files.s3.amazonaws.com/posts/1473343845-django-wsgi.png)
+![Arch](https://miro.medium.com/max/864/1*b8w4aXpN1D2oZ7QerwmPKw.png)
 
 **Prerequisite**
 [Basics of WebSockets with Javascript](https://javascript.info/websocket)
