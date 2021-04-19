@@ -25,6 +25,3 @@ class RoomView(generic.DeleteView, LoginRequiredMixin, UserPassesTestMixin):
             return super().dispatch(request, *args, **kwargs)
         else:
             return HttpResponse("500 Not allowed")
-    
-    
-    
