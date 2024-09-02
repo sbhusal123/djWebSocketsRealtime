@@ -20,7 +20,8 @@ When a docker services are composed up, it create a two separate user with follo
 ```sh
 web-backend   | User1 Credentials
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-web-backend   | {'username': 'user1', 'email': 'user1@gmail.com', 'password': 'thepassword', 'is_staff': True, 'is_superuser': True}------------------------------------------------------------------------------------------------------------------------------------------------------
+web-backend   | {'username': 'user1', 'email': 'user1@gmail.com', 'password': 'thepassword', 'is_staff': True, 'is_superuser': True
+------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 web-backend   | User2 Credentials
